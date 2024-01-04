@@ -1,42 +1,42 @@
 #include <iostream>
-#include <cstdlib> // For rand() and srand()
-#include <ctime>   // For time()
-
 using namespace std;
 
 int main() {
-    // Seed the random number generator
-    srand(static_cast<unsigned int>(time(0)));
+    char operation;
+    double num1, num2;
 
-    // Generate a random number between 1 and 100
-    int secretNumber = rand() % 100 + 1;
+    // Get input from the user
+    cout << "Enter first number: ";
+    cin >> num1;
 
-    int guess;
-    int attempts = 0;
+    cout << "Enter an operation (+, -, *, /): ";
+    cin >> operation;
 
-    cout << "Welcome to the Number Guessing Game!" << endl;
-    cout << "Try to guess the number between 1 and 100." << endl;
+    cout << "Enter second number: ";
+    cin >> num2;
 
-    do {
-        // Get the player's guess
-        cout << "Enter your guess: ";
-        cin >> guess;
-
-        // Check the guess
-        if (guess < 1 || guess > 100) {
-            cout << "Please enter a number between 1 and 100." << endl;
-        } else {
-            attempts++;
-
-            if (guess < secretNumber) {
-                cout << "Too low! Try again." << endl;
-            } else if (guess > secretNumber) {
-                cout << "Too high! Try again." << endl;
+    // Perform calculation based on the selected operation
+    switch (operation) {
+        case '+':
+            cout << num1 << " + " << num2 << " = " << num1 + num2 << endl;
+            break;
+        case '-':
+            cout << num1 << " - " << num2 << " = " << num1 - num2 << endl;
+            break;
+        case '*':
+            cout << num1 << " * " << num2 << " = " << num1 * num2 << endl;
+            break;
+        case '/':
+            if (num2 != 0) {
+                cout << num1 << " / " << num2 << " = " << num1 / num2 << endl;
             } else {
-                cout << "Congratulations! You guessed the correct number in " << attempts << " attempts." << endl;
+                cout << "Error: Division by zero is undefined." << endl;
             }
-        }
-    } while (guess != secretNumber);
+            break;
+        default:
+            cout << "Invalid operation. Please enter +, -, *, or /." << endl;
+            break;
+    }
 
     return 0;
 }
